@@ -10,6 +10,10 @@ def get_env_variable(key, default=None):
 
 
 API_URL = get_env_variable('API_URL')
+API_KEY = get_env_variable('API_KEY')
+API_USER = get_env_variable('API_USER')
+API_APP = get_env_variable('API_APP')
+
 DB_NAME = get_env_variable('DB_NAME')
 DB_USER = get_env_variable('DB_USER')
 DB_PASSWORD = get_env_variable('DB_PASSWORD')

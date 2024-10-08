@@ -4,6 +4,8 @@ from database.operations import inserir_dados_no_banco
 if __name__ == '__main__':
     dados = buscar_dados_da_api()
     
+    # print(dados)
+    
     if dados:
         inserir_dados_no_banco(dados)
     else:

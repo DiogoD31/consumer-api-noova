@@ -10,13 +10,28 @@ def inserir_dados_no_banco(dados):
 
     try:
         for item in dados:
-            nome = item.get('nome')
-            valor = item.get('valor')
+            cnpj = item.get('ClienteCNPJ')
+            codigo = item.get('Codigo')
+            data = item.get('Data')
+            validade = item.get('Validade')
+            valor_final = item.get('ValorFinal')
+            
+            codigo = int(codigo)
+            cnpj = str(cnpj)
+            valor_final = float(valor_final)
 
-            cursor.execute(
-                "INSERT INTO dados_api (nome, valor) VALUES (%s, %s)",
-                (nome, valor)
-            )
+            itens = item.get('Items', [])
+            quantidade_itens = len(itens)
+            for item in itens:
+                item_codigo = item.get('Codigo')
+                item_descricao = item.get('Descricao')
+                quantidade = item.get('Quantidade')
+
+                cursor.execute(
+                    """INSERT INTO pedidos (codigo, cnpj, data, validade, valor_final, item_codigo, item_descricao, qtd_items)
+                       VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""",
+                    (codigo, cnpj, data, validade, valor_final, item_codigo, item_descricao, quantidade_itens,)
+                )
 
         conexao.commit()
         print("Dados inseridos com sucesso!")
